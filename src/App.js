@@ -3,8 +3,9 @@ import React, {Fragment} from 'react'
 /*components*/
 import AppNavbar from './components/AppNavbar';
 import Home from './pages/Home'
-import CourseCard from './components/CourseCard';
+// import CourseCard from './components/CourseCard';
 // import Welcome from './components/Welcome';
+import Courses from './pages/Courses'
 
 export default function App(){
 
@@ -12,9 +13,10 @@ export default function App(){
 		<Fragment>
 		  <AppNavbar/>
 		  <Home/>
-		  <CourseCard/>
+		  {/*<CourseCard/>*/}
 		  {/*<Welcome name="John"/>
 		  <Welcome name="Lawrence"/>*/}
+		  <Courses/>
 		</Fragment>
 
 	)
