@@ -4,14 +4,10 @@ import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 /*components*/
-import AppNavbar from './components/AppNavbar';
-import Banner from './components/Banner';
+import App from './App'
 
 ReactDOM.render(
-  <div>
-    <AppNavbar/>
-    <Banner />
-  </div>,
+  <App/>,
   document.getElementById('root')
 );
 
