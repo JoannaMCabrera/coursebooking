@@ -14,9 +14,9 @@ export default function Courses(){
 	let CourseCards = courses.map( (course) => {
 		return <Course key={course.id} course={course}/>
 	})
-
+ 
 	return(
-		<Container fluid>
+		<Container className="p-4">
 			{CourseCards}
 		</Container>
 	)

@@ -5,7 +5,9 @@ import AppNavbar from './components/AppNavbar';
 import Home from './pages/Home'
 // import CourseCard from './components/CourseCard';
 // import Welcome from './components/Welcome';
-import Courses from './pages/Courses'
+import Courses from './pages/Courses';
+// import Counter from './components/Counter';
+import Register from './pages/Register';
 
 export default function App(){
 
@@ -17,6 +19,8 @@ export default function App(){
 		  {/*<Welcome name="John"/>
 		  <Welcome name="Lawrence"/>*/}
 		  <Courses/>
+		  {/*<Counter/>*/}
+		  <Register/>
 		</Fragment>
 
 	)
