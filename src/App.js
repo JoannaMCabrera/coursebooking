@@ -1,6 +1,9 @@
 import React, {useState} from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+/*Context*/
+import UserContext from './UserContext';
+
 /*components*/
 import AppNavbar from './components/AppNavbar';
 import Home from './pages/Home'
@@ -10,12 +13,18 @@ import Courses from './pages/Courses';
 // import Counter from './components/Counter';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import ErrorPage from './components/ErrorPage';
 
 export default function App(){
 
-	const [user, setUser] = useState(null);
+	const [user, setUser] = useState({email: localStorage.getItem('email')});
 
-	return(
+	const unsetUser = () => {
+		localStorage.clear();
+		setUser({email: null})
+	}
+
+	return( 
 	/*	<Fragment>
 			<AppNavbar/>
 			<Home/>
@@ -28,15 +37,18 @@ export default function App(){
 			<Login />
 		</Fragment>
 	*/
-	<BrowserRouter>
-		<AppNavbar user={user}/>
-		<Switch>
-			<Route exact path="/" component={Home} />
-			<Route exact path="/courses" component={Courses} />
-			<Route exact path="/register" component={Register} />
-			<Route exact path="/login" component={Login} />
-		</Switch>
-	</BrowserRouter>
 
+	<UserContext.Provider value={{user, setUser, unsetUser}}> 
+		<BrowserRouter>
+			<AppNavbar/>
+			<Switch>
+				<Route exact path="/" component={Home} />
+				<Route exact path="/courses" component={Courses} />
+				<Route exact path="/register" component={Register} />
+				<Route exact path="/login" component={Login} />
+				<Route component={ErrorPage} />
+			</Switch>
+		</BrowserRouter>
+	</UserContext.Provider>
 	)
 }

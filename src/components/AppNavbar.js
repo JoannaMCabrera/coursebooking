@@ -1,5 +1,8 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useContext} from 'react';
 import { Link, NavLink } from 'react-router-dom';
+
+/*context*/
+import UserContext from './../UserContext';
 
 /*react boostrap*/
 import {Navbar, Nav} from 'react-bootstrap';
@@ -7,9 +10,17 @@ import {Navbar, Nav} from 'react-bootstrap';
 // import Nav from 'react-bootstrap/Nav';
 
 /*app navbar*/
-export default function AppNavbar(props){
+export default function AppNavbar(){
   // console.log(props)
-  let user = props.user
+  // let user = props.user 
+
+  // destructure context object
+  const {user, unsetUser} = useContext(UserContext)
+
+
+  const logout = () => {
+    unsetUser();
+  }
 
   let leftNav = (user === null) ? (
       <Fragment>
@@ -19,7 +30,7 @@ export default function AppNavbar(props){
     ) 
     : (
       <Fragment>
-        <Nav.Link as={NavLink} to="/logout">Logout</Nav.Link>
+        <Nav.Link as={NavLink} to="/logout" onClick={logout}>Logout</Nav.Link>
       </Fragment>
     )
 

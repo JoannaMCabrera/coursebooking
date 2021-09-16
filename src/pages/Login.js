@@ -1,4 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
+
+/*Context*/
+import UserContext from './../UserContext';
 
 /*react-bootstrap components*/
 import {Container, Form, Button} from 'react-bootstrap';
@@ -9,6 +12,9 @@ export default function Login(){
 	const [password, setPassword] = useState('');
 	const [isDisabled, setIsDisabled] = useState(true);
 
+	/*destructure context object*/
+	const {user, setUser} = useContext(UserContext);
+
 	useEffect( () => {
 		if(email !== '' && password !== ''){
 			setIsDisabled(false)
@@ -17,10 +23,15 @@ export default function Login(){
 		}
 	}, [email, password]);
 
-	function register(e){
+	function login(e){
 		e.preventDefault();
 
 		alert('Login Successful');
+
+		// update the user using email
+		setUser({email: email});
+		// save email to local storage
+		localStorage.setItem('email', email)
 
 		setEmail('');
 		setPassword('');
@@ -29,7 +40,7 @@ export default function Login(){
 	return(
 		<Container className="mb-5">
 			<h1 className="text-center">Login</h1>
-			<Form onSubmit={register}>
+			<Form onSubmit={login}>
 				<Form.Group className="mb-3" controlId="formBasicEmail">
 					<Form.Label>Email address</Form.Label>
 					<Form.Control type="email" placeholder="Enter email" value={email}
