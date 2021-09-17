@@ -4,9 +4,11 @@ import PropTypes from 'prop-types';
 /*react-bootstrap components*/
 import {Card, Button} from 'react-bootstrap';
 
-export default function Course(props){
-	console.log(props)
-	let course = props.course
+export default function Course({courseProp}){
+	console.log(courseProp)
+
+	const {name, description, price} = courseProp
+	// console.log(name)
 
 	//[state, setState] = useState()
 	const [count, setCount] = useState(0);
@@ -38,25 +40,16 @@ export default function Course(props){
 	return(
 		<Card className="mb-3">
 			<Card.Body>
-				<Card.Title>{course.name}</Card.Title>
+				<Card.Title>{name}</Card.Title>
 				<h5>Description</h5>
-				<p>{course.description}</p>
+				<p>{description}</p>
 				<h5>Price:</h5>
-				<p>{course.price}</p>
+				<p>{price}</p>
 				<h5>Enrollees</h5>
 				<p>{count} Enrollees</p>
 				<h5>Seats</h5>
 				<p>{seat} Seats</p>
-		    	<Button variant="primary" onClick={enroll
-		    		/*() => { 
-		    			//used ternary operator
-		    				(count < 30 )
-		    				?
-		    					setCount( count + 1 )
-		    				
-		    				: alert('No slots available')
-		    		}*/
-		    	} disabled={isDisabled}>Enroll</Button>
+		    	<Button variant="primary" onClick={enroll} disabled={isDisabled}>Enroll</Button>
 			</Card.Body>
 		</Card>
 	)

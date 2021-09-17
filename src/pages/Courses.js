@@ -50,7 +50,6 @@ export default function Courses(){
 					<AdminView courseData={courses} fetchData={fetchData}/>
 				:
 					<UserView courseData={courses} />
-
 			}
 		</Container>
 	)
