@@ -4,19 +4,21 @@ import PropTypes from 'prop-types';
 /*react-bootstrap components*/
 import {Card, Button} from 'react-bootstrap';
 
+import {Link} from 'react-router-dom';
+
 export default function Course({courseProp}){
 	console.log(courseProp)
 
-	const {name, description, price} = courseProp
+	const {name, description, price, _id} = courseProp
 	// console.log(name)
 
 	//[state, setState] = useState()
-	const [count, setCount] = useState(0);
+	/*const [count, setCount] = useState(0);
 	const [seat, setSeat] = useState(10);
-	const [isDisabled, setIsDisabled] = useState(false);
+	const [isDisabled, setIsDisabled] = useState(false);*/
 
 	//handler
-	function enroll(){
+	/*function enroll(){
 		//conditional rendering
 		if(seat > 0){
 			setCount(count + 1)
@@ -26,8 +28,8 @@ export default function Course({courseProp}){
 		// else {
 		// 	alert('No seats available')
 		// }
-	}
-
+	}*/
+/*
 	useEffect( () => {
 
 		if(seat === 0){
@@ -35,7 +37,7 @@ export default function Course({courseProp}){
 		}
 
 	}, [seat]);
-
+*/
 
 	return(
 		<Card className="mb-3">
@@ -45,11 +47,15 @@ export default function Course({courseProp}){
 				<p>{description}</p>
 				<h5>Price:</h5>
 				<p>{price}</p>
-				<h5>Enrollees</h5>
+				{/*<h5>Enrollees</h5>
 				<p>{count} Enrollees</p>
 				<h5>Seats</h5>
 				<p>{seat} Seats</p>
-		    	<Button variant="primary" onClick={enroll} disabled={isDisabled}>Enroll</Button>
+		    	<Button variant="primary" onClick={enroll} disabled={isDisabled}>Enroll</Button>*/}
+
+		    	<Link className="btn btn-primary" to={`/courses/${_id}`}>
+		    		Details
+		    	</Link>
 			</Card.Body>
 		</Card>
 	)

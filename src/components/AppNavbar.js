@@ -26,18 +26,24 @@ export default function AppNavbar(){
     history.push('/login');
   }
 
-  let leftNav = (user.id === null) ? (
-      <Fragment>
-        <Nav.Link as={NavLink} to="/register">Register</Nav.Link>
-        <Nav.Link as={NavLink} to="/login">Login</Nav.Link>
-      </Fragment>
-    ) 
-    : (
-      <Fragment>
-        <Nav.Link onClick={logout}>Logout</Nav.Link>
-      </Fragment>
-    )
+  let leftNav = (user.id !== null) ? 
+        (user.isAdmin === true) ?
+          <Fragment>
+            <Nav.Link as={NavLink} to="/addCourse">Add Course</Nav.Link>
+            <Nav.Link onClick={logout}>Logout</Nav.Link>
+          </Fragment>
+        :
+          <Fragment>
+            <Nav.Link onClick={logout}>Logout</Nav.Link>
+          </Fragment>
+    :
+      (
+        <Fragment>
+            <Nav.Link as={NavLink} to="/register">Register</Nav.Link>
+            <Nav.Link as={NavLink} to="/login">Login</Nav.Link>
+          </Fragment>
 
+      )
 
   return (
     <Navbar bg="info" expand="lg">

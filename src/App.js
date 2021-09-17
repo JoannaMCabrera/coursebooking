@@ -14,6 +14,8 @@ import Courses from './pages/Courses';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import ErrorPage from './components/ErrorPage';
+import SpecificCourse from './pages/SpecificCourse';
+import AddCourse from './pages/AddCourse';
 
 export default function App(){
 
@@ -80,6 +82,8 @@ export default function App(){
 				<Route exact path="/courses" component={Courses} />
 				<Route exact path="/register" component={Register} />
 				<Route exact path="/login" component={Login} />
+				<Route exact path="/courses/:courseId" component={SpecificCourse} />
+				<Route exact path="/addCourse" component={AddCourse} />
 				<Route component={ErrorPage} />
 			</Switch>
 		</BrowserRouter>
