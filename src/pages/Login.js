@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
+import { Redirect } from 'react-router-dom'
 
 /*Context*/
 import UserContext from './../UserContext';
@@ -26,35 +27,73 @@ export default function Login(){
 	function login(e){
 		e.preventDefault();
 
-		alert('Login Successful');
+		// alert('Login Successful');
+		fetch('https://course-booking-api.herokuapp.com/api/users/login', {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				email: email,
+				password: password
+			})
+		})
+		.then(result => result.json())
+		.then(result => {
+			console.log(result) //{access: token}
 
-		// update the user using email
-		setUser({email: email});
-		// save email to local storage
-		localStorage.setItem('email', email)
+			if(typeof result.access !== "undefined"){
+				//what should we do with the access token?
+				localStorage.setItem('token', result.access)
+				userDetails(result.access)
+			}
+		})
+
+		const userDetails = (token) => {
+			fetch('https://course-booking-api.herokuapp.com/api/users/details',{
+				method: "GET",
+				headers: {
+					"Authorization": `Bearer ${token}`
+				}
+			})
+			.then(result => result.json())
+			.then(result => {
+				console.log(result) //whole user object or document
+
+				setUser({
+					id: result._id,
+					isAdmin: result.isAdmin
+				});
+			})
+		}
 
 		setEmail('');
 		setPassword('');
 	}
 
 	return(
-		<Container className="mb-5">
-			<h1 className="text-center">Login</h1>
-			<Form onSubmit={login}>
-				<Form.Group className="mb-3" controlId="formBasicEmail">
-					<Form.Label>Email address</Form.Label>
-					<Form.Control type="email" placeholder="Enter email" value={email}
-					onChange={(e)=> setEmail(e.target.value) }/>
-				</Form.Group>
+		(user.id !== null) ? 
 
-				<Form.Group className="mb-3" controlId="formBasicPassword">
-					<Form.Label>Password</Form.Label>
-					<Form.Control type="password" placeholder="Password" value={password}
-					onChange={(e)=> setPassword(e.target.value) }/>
-				</Form.Group>
+			<Redirect to="/" />
 
-				<Button variant="primary" type="submit" disabled={isDisabled}>Submit</Button>
-			</Form>
-		</Container>
+		: 
+			<Container className="mb-5">
+				<h1 className="text-center">Login</h1>
+				<Form onSubmit={ (e) => login(e) }>
+					<Form.Group className="mb-3" controlId="formBasicEmail">
+						<Form.Label>Email address</Form.Label>
+						<Form.Control type="email" placeholder="Enter email" value={email}
+						onChange={(e)=> setEmail(e.target.value) }/>
+					</Form.Group>
+
+					<Form.Group className="mb-3" controlId="formBasicPassword">
+						<Form.Label>Password</Form.Label>
+						<Form.Control type="password" placeholder="Password" value={password}
+						onChange={(e)=> setPassword(e.target.value) }/>
+					</Form.Group>
+
+					<Button variant="primary" type="submit" disabled={isDisabled}>Submit</Button>
+				</Form>
+			</Container>
 	)
 }

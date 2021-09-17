@@ -1,5 +1,5 @@
 import React, {Fragment, useContext} from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useHistory } from 'react-router-dom';
 
 /*context*/
 import UserContext from './../UserContext';
@@ -15,14 +15,18 @@ export default function AppNavbar(){
   // let user = props.user 
 
   // destructure context object
-  const {user, unsetUser} = useContext(UserContext)
+  const {user, unsetUser} = useContext(UserContext);
+
+  //useHistory is a react-router-dom hook
+  let history = useHistory();
 
 
   const logout = () => {
     unsetUser();
+    history.push('/login');
   }
 
-  let leftNav = (user === null) ? (
+  let leftNav = (user.id === null) ? (
       <Fragment>
         <Nav.Link as={NavLink} to="/register">Register</Nav.Link>
         <Nav.Link as={NavLink} to="/login">Login</Nav.Link>
@@ -30,7 +34,7 @@ export default function AppNavbar(){
     ) 
     : (
       <Fragment>
-        <Nav.Link as={NavLink} to="/logout" onClick={logout}>Logout</Nav.Link>
+        <Nav.Link onClick={logout}>Logout</Nav.Link>
       </Fragment>
     )
 

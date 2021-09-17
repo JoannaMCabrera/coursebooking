@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {Container, Row, Col, Jumbotron, Nav} from 'react-bootstrap';
-import {Link, NavLink} from 'react-router-dom';
+import {Container, Row, Col, Jumbotron} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
 export default function ErrorPage(){
 

@@ -17,11 +17,19 @@ import ErrorPage from './components/ErrorPage';
 
 export default function App(){
 
-	const [user, setUser] = useState({email: localStorage.getItem('email')});
+	const [user, setUser] = useState(
+		{
+			id: null,
+			isAdmin: null
+		}
+	);
 
 	const unsetUser = () => {
 		localStorage.clear();
-		setUser({email: null})
+		setUser({
+			id: null,
+			isAdmin: null
+		})
 	}
 
 	return( 

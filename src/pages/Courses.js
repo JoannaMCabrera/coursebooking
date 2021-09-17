@@ -11,6 +11,12 @@ import courses from './../mock-data/courses';
 
 export default function Courses(){
 
+	//fetch
+
+	//display courses using map
+
+	//no need for user context muna since later ko pa ituturo ang conditional rendering
+
 	let CourseCards = courses.map( (course) => {
 		return <Course key={course.id} course={course}/>
 	})
