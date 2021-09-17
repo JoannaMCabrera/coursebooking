@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 /*Context*/
@@ -31,6 +31,32 @@ export default function App(){
 			isAdmin: null
 		})
 	}
+
+	useEffect( () => {
+		let token = localStorage.getItem('token');
+		fetch('https://course-booking-api.herokuapp.com/api/users/details', {
+			method: "GET",
+			headers: {
+				"Authorization": `Bearer ${token}`
+			}
+		})
+		.then(result => result.json())
+		.then(result => {
+			console.log(result) //object/ document of a user
+
+			if(typeof result._id !== "undefined"){
+				setUser({
+					id: result._id,
+					isAdmin: result.isAdmin
+				})
+			} else {
+				setUser({
+					id: null,
+					isAdmin: null
+				})
+			}
+		})
+	}, [])
 
 	return( 
 	/*	<Fragment>
