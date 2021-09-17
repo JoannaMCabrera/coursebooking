@@ -1,29 +1,57 @@
-import React from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 /*react-bootstrap component*/
 import {Container} from 'react-bootstrap'
 
 /*components*/
-import Course from './../components/Course';
+// import Course from './../components/Course';
+import AdminView from './../components/AdminView.js';
+import UserView from './../components/UserView.js';
+
 
 /*mock data*/
-import courses from './../mock-data/courses';
+// import courses from './../mock-data/courses';
 
+/*context*/
+import UserContext from './../UserContext';
 
 export default function Courses(){
 
-	//fetch
+	const [courses, setCourses] = useState([]);
 
-	//display courses using map
+	const {user} = useContext(UserContext);
 
-	//no need for user context muna since later ko pa ituturo ang conditional rendering
+	const fetchData = () => {
+		let token = localStorage.getItem('token')
 
-	let CourseCards = courses.map( (course) => {
-		return <Course key={course.id} course={course}/>
-	})
+		fetch('https://course-booking-api.herokuapp.com/api/courses/all',{
+			method: "GET",
+			headers: {
+				"Authorization": `Bearer ${token}`
+			}
+		})
+		.then(result => result.json())
+		.then(result => {
+			console.log(result)
+			setCourses(result)
+		})
+	}
+
+	useEffect( () => {
+		fetchData()
+	}, [])
+
+	// let CourseCards = courses.map( (course) => {
+	// 	return <Course key={course.id} course={course}/>
+	// })
  
 	return(
 		<Container className="p-4">
-			{CourseCards}
+			{ (user.isAdmin === true) ?
+					<AdminView courseData={courses} fetchData={fetchData}/>
+				:
+					<UserView courseData={courses} />
+
+			}
 		</Container>
 	)
 }
