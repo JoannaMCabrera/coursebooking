@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, Fragment} from 'react'
 
 import {Container, Table, Button, Modal, Form} from 'react-bootstrap'
 
@@ -73,22 +73,30 @@ export default function AdminView(props){
 						}
 					</td>
 					<td>
-						<Button variant="primary" size="sm" 
-						onClick={ ()=> openEdit(course._id) }>
-							Update
-						</Button>
+						<Fragment>
+							<Button variant="primary" size="sm" 
+							onClick={ ()=> openEdit(course._id) }>
+								Update
+							</Button>
+							<Button variant="danger" size="sm"
+							onClick={ () => deleteToggle(course._id)}>
+								Delete
+							</Button>
+						</Fragment>
 
 						{
 							(course.isActive === true) ?
-								<Button variant="danger" size="sm"
+								<Button variant="warning" size="sm"
 								onClick={()=> archiveToggle(course._id, course.isActive)}>
 									Disable
 								</Button>
 							:
+								
 								<Button variant="success" size="sm"
-								onClick={ () => archiveToggle(course._id, course.isActive)}>
+								onClick={ () => unarchiveToggle(course._id, course.isActive)}>
 									Enable
 								</Button>
+								
 						}
 
 					</td>
@@ -157,6 +165,68 @@ export default function AdminView(props){
 			body: JSON.stringify({
 				isActive: isActive
 			})
+		})
+		.then(result => result.json())
+		.then(result => {
+			console.log(result)
+
+			fetchData();
+			if(result === true){
+				Swal.fire({
+					title: "Success",
+					icon: "success",
+					"text": "Course successfully archived/unarchived"
+				})
+			} else {
+				fetchData();
+				Swal.fire({
+					title: "Something went wrong",
+					icon: "error",
+					"text": "Please try again"
+				})
+			}
+		})
+	}
+
+	const unarchiveToggle = (courseId, isActive) => {
+		fetch(`https://course-booking-api.herokuapp.com/api/courses/${courseId}/unarchive`, {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+				"Authorization": `Bearer ${token}`
+			},
+			body: JSON.stringify({
+				isActive: isActive
+			})
+		})
+		.then(result => result.json())
+		.then(result => {
+			console.log(result)
+
+			fetchData();
+			if(result === true){
+				Swal.fire({
+					title: "Success",
+					icon: "success",
+					"text": "Course successfully archived/unarchived"
+				})
+			} else {
+				fetchData();
+				Swal.fire({
+					title: "Something went wrong",
+					icon: "error",
+					"text": "Please try again"
+				})
+			}
+		})
+	}
+
+	const deleteToggle = (courseId) => {
+		fetch(`https://course-booking-api.herokuapp.com/api/courses/${courseId}/delete`, {
+			method: "DELETE",
+			headers: {
+				"Authorization": `Bearer ${token}`
+			}
 		})
 		.then(result => result.json())
 		.then(result => {
