@@ -29,7 +29,7 @@ export default function AdminView(props){
 
 
 	const openEdit = (courseId) => {
-		fetch(`https://course-booking-api.herokuapp.com/api/courses/${courseId}`,{
+		fetch(`https://whispering-castle-39875.herokuapp.com/api/courses/${courseId}`,{
 			method: "GET",
 			headers: {
 				"Authorization": `Bearer ${token}`
@@ -74,11 +74,11 @@ export default function AdminView(props){
 					</td>
 					<td>
 						<Fragment>
-							<Button variant="primary" size="sm" 
+							<Button variant="outline-primary" size="sm" 
 							onClick={ ()=> openEdit(course._id) }>
 								Update
 							</Button>
-							<Button variant="danger" size="sm"
+							<Button variant="outline-primary" size="sm"
 							onClick={ () => deleteToggle(course._id)}>
 								Delete
 							</Button>
@@ -86,13 +86,13 @@ export default function AdminView(props){
 
 						{
 							(course.isActive === true) ?
-								<Button variant="warning" size="sm"
+								<Button variant="outline-primary" size="sm"
 								onClick={()=> archiveToggle(course._id, course.isActive)}>
 									Disable
 								</Button>
 							:
 								
-								<Button variant="success" size="sm"
+								<Button variant="outline-primary" size="sm"
 								onClick={ () => unarchiveToggle(course._id, course.isActive)}>
 									Enable
 								</Button>
@@ -112,7 +112,7 @@ export default function AdminView(props){
 
 		e.preventDefault()
 
-		fetch(`https://course-booking-api.herokuapp.com/api/courses/${courseId}/edit`, {
+		fetch(`https://whispering-castle-39875.herokuapp.com/api/courses/${courseId}/edit`, {
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",
@@ -156,7 +156,7 @@ export default function AdminView(props){
 	/*update course*/
 	const archiveToggle = (courseId, isActive) => {
 
-		fetch(`https://course-booking-api.herokuapp.com/api/courses/${courseId}/archive`, {
+		fetch(`https://whispering-castle-39875.herokuapp.com/api/courses/${courseId}/archive`, {
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",
@@ -189,7 +189,7 @@ export default function AdminView(props){
 	}
 
 	const unarchiveToggle = (courseId, isActive) => {
-		fetch(`https://course-booking-api.herokuapp.com/api/courses/${courseId}/unarchive`, {
+		fetch(`https://whispering-castle-39875.herokuapp.com/api/courses/${courseId}/unarchive`, {
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",
@@ -222,7 +222,7 @@ export default function AdminView(props){
 	}
 
 	const deleteToggle = (courseId) => {
-		fetch(`https://course-booking-api.herokuapp.com/api/courses/${courseId}/delete`, {
+		fetch(`https://whispering-castle-39875.herokuapp.com/api/courses/${courseId}/delete`, {
 			method: "DELETE",
 			headers: {
 				"Authorization": `Bearer ${token}`
@@ -252,7 +252,7 @@ export default function AdminView(props){
 
 	const addCourse = (e) => {
 		e.preventDefault()
-		fetch('https://course-booking-api.herokuapp.com/api/courses/addCourse', {
+		fetch('https://whispering-castle-39875.herokuapp.com/api/courses/addCourse', {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -300,7 +300,7 @@ export default function AdminView(props){
 			<div>
 				<h2 className="text-center">Admin Dashboard</h2>
 				<div className="d-flex justify-content-end mb-2">
-					<Button variant="primary" onClick={openAdd}>Add New Course</Button>
+					<Button variant="outline-primary" onClick={openAdd}>Add New Course</Button>
 				</div>
 			</div>
 			<Table>
@@ -351,8 +351,8 @@ export default function AdminView(props){
 						</Form.Group>
 					</Modal.Body>
 					<Modal.Footer>
-						<Button variant="secondary" onClick={closeEdit}>Close</Button>
-						<Button variant="success" type="submit">Submit</Button>
+						<Button variant="outline-primary" onClick={closeEdit}>Close</Button>
+						<Button variant="outline-primary" type="submit">Submit</Button>
 					</Modal.Footer>
 				</Form>
 			</Modal>
@@ -387,8 +387,8 @@ export default function AdminView(props){
 					</Form.Group>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button variant="secondary" onClick={closeAdd}>Close</Button>
-					<Button variant="success" type="submit">Submit</Button>
+					<Button variant="outline-primary" onClick={closeAdd}>Close</Button>
+					<Button variant="outline-primary" type="submit">Submit</Button>
 				</Modal.Footer>
 			</Form>
 		</Modal>

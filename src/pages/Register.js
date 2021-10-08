@@ -40,7 +40,7 @@ export default function Register(){
 		e.preventDefault();
 
 		// alert('Registration Successful, you may now log in');
-		fetch('https://course-booking-api.herokuapp.com/api/users/checkEmail', {
+		fetch('https://whispering-castle-39875.herokuapp.com/api/users/checkEmail', {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
@@ -63,7 +63,7 @@ export default function Register(){
 			} else {
 				//what to do when user/email still not existing?
 
-				fetch('https://course-booking-api.herokuapp.com/api/users/register', {
+				fetch('https://whispering-castle-39875.herokuapp.com/api/users/register', {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"

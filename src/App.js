@@ -36,7 +36,7 @@ export default function App(){
 
 	useEffect( () => {
 		let token = localStorage.getItem('token');
-		fetch('https://course-booking-api.herokuapp.com/api/users/details', {
+		fetch('https://whispering-castle-39875.herokuapp.com/api/users/details', {
 			method: "GET",
 			headers: {
 				"Authorization": `Bearer ${token}`
@@ -44,7 +44,7 @@ export default function App(){
 		})
 		.then(result => result.json())
 		.then(result => {
-			console.log(result) //object/ document of a user
+			// console.log(result) //object/ document of a user
 
 			if(typeof result._id !== "undefined"){
 				setUser({

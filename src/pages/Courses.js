@@ -20,10 +20,11 @@ export default function Courses(){
 
 	const {user} = useContext(UserContext);
 
+	// let token = localStorage.getItem('token')
 	const fetchData = () => {
 		let token = localStorage.getItem('token')
 
-		fetch('https://course-booking-api.herokuapp.com/api/courses/all',{
+		fetch('https://whispering-castle-39875.herokuapp.com/api/courses/all',{
 			method: "GET",
 			headers: {
 				"Authorization": `Bearer ${token}`
@@ -43,10 +44,10 @@ export default function Courses(){
 	// let CourseCards = courses.map( (course) => {
 	// 	return <Course key={course.id} course={course}/>
 	// })
- 
+ 	console.log(fetchData);
 	return(
 		<Container className="p-4">
-			{ (user.isAdmin === true) ?
+			{ (user.isAdmin === true || user.isAdmin !== null) ?
 					<AdminView courseData={courses} fetchData={fetchData}/>
 				:
 					<UserView courseData={courses} />

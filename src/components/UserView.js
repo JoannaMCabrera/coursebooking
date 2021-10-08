@@ -6,7 +6,7 @@ import Course from './Course';
 
 export default function UserView({courseData}){
 
-	// console.log(courseData)
+	console.log(courseData)
 
 	const [courses, setCourses] = useState([])
 

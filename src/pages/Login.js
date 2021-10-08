@@ -28,7 +28,7 @@ export default function Login(){
 		e.preventDefault();
 
 		// alert('Login Successful');
-		fetch('https://course-booking-api.herokuapp.com/api/users/login', {
+		fetch('https://whispering-castle-39875.herokuapp.com/api/users/login', {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
@@ -50,7 +50,7 @@ export default function Login(){
 		})
 
 		const userDetails = (token) => {
-			fetch('https://course-booking-api.herokuapp.com/api/users/details',{
+			fetch('https://whispering-castle-39875.herokuapp.com/api/users/details',{
 				method: "GET",
 				headers: {
 					"Authorization": `Bearer ${token}`

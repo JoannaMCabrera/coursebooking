@@ -1,4 +1,6 @@
-import React from 'react';
+import React,{useContext} from 'react';
+import {useHistory} from 'react-router-dom';
+import UserContext from '../UserContext';
 
 /*react-bootstrap components*/
 import {
@@ -10,6 +12,17 @@ import {
 } from 'react-bootstrap';
 
 export default function Banner(){
+
+	const {user}= useContext(UserContext)
+    const history = useHistory()
+
+	function loc() {
+        if(user.id == null){
+            history.push("/login")
+        }else{
+            history.push("/courses")
+        }
+    }
 
 	return(
 /*
@@ -31,7 +44,7 @@ export default function Banner(){
 					<Jumbotron fluid className="px-3">
 					  <h1>Zuitt Coding Bootcamp</h1>
 					  <p>Opportunities for everyone, everywhere.</p>
-					  <Button variant="primary">Enroll</Button>
+					  <Button variant="primary" onClick={loc}>Enroll</Button>
 					</Jumbotron>
 				</Col>
 			</Row>

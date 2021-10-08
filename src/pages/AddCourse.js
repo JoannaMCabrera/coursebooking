@@ -33,7 +33,7 @@ export default function AddCourse(){
 
 		e.preventDefault();
 
-		fetch('https://course-booking-api.herokuapp.com/api/courses/addCourse', {
+		fetch('https://whispering-castle-39875.herokuapp.com/api/courses/addCourse', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ export default function AddCourse(){
 				Swal.fire({
 					title: "Success",
 					icon: "success",
-					text: "Couse successfully added"
+					text: "Course successfully added"
 				})
 
 				history.push('/courses');

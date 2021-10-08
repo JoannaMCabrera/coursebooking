@@ -24,7 +24,7 @@ export default function SpecificCourse(){
 	let history = useHistory();
 
 	useEffect( () => {
-		fetch(`https://course-booking-api.herokuapp.com/api/courses/${courseId}`,
+		fetch(`https://whispering-castle-39875.herokuapp.com/api/courses/${courseId}`,
 			{
 				method: "GET",
 				headers: {
@@ -43,7 +43,7 @@ export default function SpecificCourse(){
 	}, [])
 
 	const enroll = () => {
-		fetch('https://course-booking-api.herokuapp.com/api/users/enroll', 
+		fetch('https://whispering-castle-39875.herokuapp.com/api/users/enroll', 
 			{
 				method: "POST",
 				headers: {
